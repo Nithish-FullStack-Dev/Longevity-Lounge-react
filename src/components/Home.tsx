@@ -6,6 +6,7 @@ import BluePrint from "./BluePrint";
 import Procactive from "./Procactive";
 import BehindTheScenes from "./BehindTheScenes";
 import ReadyToBegin from "./ReadyToBegin";
+import VideoGrid from "./VideoGrid";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <OurPhilosophy />
       <BluePrint />
       <Procactive />
+      <VideoGrid />
       <BehindTheScenes />
       <ReadyToBegin />
     </>

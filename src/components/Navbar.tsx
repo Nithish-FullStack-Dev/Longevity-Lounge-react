@@ -46,6 +46,8 @@ const Navbar = () => {
 
     if (window.innerWidth <= 768) closeMenu();
   };
+  const NAV_BTN_CLASSES =
+    "h-10 px-5 inline-flex items-center justify-center rounded-full whitespace-nowrap";
 
   return (
     <header className="site-header">
@@ -91,24 +93,13 @@ const Navbar = () => {
                             ? handleNavClick(item.id, item.label)
                             : setActiveItem("Home")
                         }
-                        className="rounded-full"
+                        className={NAV_BTN_CLASSES}
                       >
                         <StarButton
                           lightColor="#F6BF7F"
                           backgroundColor="black"
                           borderWidth={1}
-                          className="
-          bg-black
-          border border-white/25
-          px-5 py-2
-          rounded-full
-          pointer-events-none
-
-          [&_span]:text-[#f6bf7f]
-          [&_span]:bg-none
-          [&_span]:!text-opacity-100
-          [&_span]:font-['Inter',sans-serif]
-        "
+                          className="bg-black border border-white/25 px-5 py-2 rounded-full pointer-events-none [&_span]:text-[#f6bf7f] [&_span]:bg-none [&_span]:!text-opacity-100 [&_span]:font-['Inter',sans-serif]"
                         >
                           {item.label}
                         </StarButton>
@@ -122,13 +113,7 @@ const Navbar = () => {
                             ? handleNavClick(item.id, item.label)
                             : setActiveItem("Home")
                         }
-                        className="
-        px-5 py-2
-        rounded-full
-        text-[#f6bf7f]
-        font-['Inter',sans-serif]
-        bg-transparent
-      "
+                        className={`${NAV_BTN_CLASSES} text-[#f6bf7f] font-['Inter',sans-serif] bg-transparent`}
                       >
                         {item.label}
                       </button>
@@ -142,7 +127,7 @@ const Navbar = () => {
                           ? handleNavClick(item.id, item.label)
                           : setActiveItem("Home")
                       }
-                      className="nav-link"
+                      className={`${NAV_BTN_CLASSES} nav-link`}
                     >
                       {item.label}
                     </button>
