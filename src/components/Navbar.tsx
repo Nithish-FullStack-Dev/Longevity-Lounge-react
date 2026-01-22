@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { StarButton } from "./ui/star-button";
+import { useDesktop } from "@/hooks/useDesktop";
 
 const Navbar = () => {
+  const isDesktop = useDesktop();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("Home");
   const navigate = useNavigate();
@@ -70,33 +73,128 @@ const Navbar = () => {
           >
             {[
               { label: "Home", id: "" },
+              { label: "About", id: "about" },
               { label: "Our Services", id: "services" },
-              { label: "Gallery", id: "gallery" },
               { label: "Contact", id: "contact" },
-            ].map((item) => (
-              <li
-                key={item.label}
-                className={`nav-item ${
-                  activeItem === item.label ? "active" : ""
-                }`}
-                onClick={() =>
-                  item.id
-                    ? handleNavClick(item.id, item.label)
-                    : setActiveItem("Home")
-                }
-              >
-                <a href={item.id ? `#${item.id}` : "#"}>{item.label}</a>
-              </li>
-            ))}
+            ].map((item) => {
+              const isActive = activeItem === item.label;
+
+              return (
+                <li key={item.label} className="nav-item overflow-visible">
+                  {isActive ? (
+                    isDesktop ? (
+                      /* DESKTOP — Animated StarButton */
+                      <button
+                        type="button"
+                        onClick={() =>
+                          item.id
+                            ? handleNavClick(item.id, item.label)
+                            : setActiveItem("Home")
+                        }
+                        className="rounded-full"
+                      >
+                        <StarButton
+                          lightColor="#F6BF7F"
+                          backgroundColor="black"
+                          borderWidth={1}
+                          className="
+          bg-black
+          border border-white/25
+          px-5 py-2
+          rounded-full
+          pointer-events-none
+
+          [&_span]:text-[#f6bf7f]
+          [&_span]:bg-none
+          [&_span]:!text-opacity-100
+          [&_span]:font-['Inter',sans-serif]
+        "
+                        >
+                          {item.label}
+                        </StarButton>
+                      </button>
+                    ) : (
+                      /* MOBILE — Plain button */
+                      <button
+                        type="button"
+                        onClick={() =>
+                          item.id
+                            ? handleNavClick(item.id, item.label)
+                            : setActiveItem("Home")
+                        }
+                        className="
+        px-5 py-2
+        rounded-full
+        text-[#f6bf7f]
+        font-['Inter',sans-serif]
+        bg-transparent
+      "
+                      >
+                        {item.label}
+                      </button>
+                    )
+                  ) : (
+                    /* INACTIVE ITEM (ALL DEVICES) */
+                    <button
+                      type="button"
+                      onClick={() =>
+                        item.id
+                          ? handleNavClick(item.id, item.label)
+                          : setActiveItem("Home")
+                      }
+                      className="nav-link"
+                    >
+                      {item.label}
+                    </button>
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           <div className={`nav-cta ${menuOpen ? "active" : ""}`}>
-            <button
-              className="btn-enquire"
-              onClick={() => navigate("/callback")}
-            >
-              Request Callback
-            </button>
+            {isDesktop ? (
+              <button
+                type="button"
+                onClick={() => navigate("/callback")}
+                className="rounded-full"
+              >
+                <StarButton
+                  lightColor="#F6BF7F"
+                  backgroundColor="black"
+                  borderWidth={1}
+                  className="
+        bg-transparent
+        border border-white/25
+        px-7 py-3
+        rounded-full
+        pointer-events-none
+
+        [&_span]:text-[#f6bf7f]
+        [&_span]:bg-none
+        [&_span]:!text-opacity-100
+        [&_span]:font-['Inter',sans-serif]
+      "
+                >
+                  Request Callback
+                </StarButton>
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => navigate("/callback")}
+                className="
+      px-7 py-3
+      rounded-full
+      text-[#f6bf7f]
+      font-['Inter',sans-serif]
+      bg-transparent
+      border border-white/25
+    "
+              >
+                Request Callback
+              </button>
+            )}
 
             <div className="follow-us">
               <h5>Social Media :</h5>
