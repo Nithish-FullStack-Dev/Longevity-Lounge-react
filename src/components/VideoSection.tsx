@@ -1,6 +1,6 @@
 const VideoSection = () => {
   return (
-    <section className="hero-video-section">
+    <section id="home" className="hero-video-section">
       <video
         id="heroVideo"
         className="hero-video"

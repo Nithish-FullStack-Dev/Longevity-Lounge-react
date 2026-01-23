@@ -2,7 +2,7 @@ import { Microscope } from "lucide-react";
 
 const MostTrusted = () => {
   return (
-    <section className="most-trusted-section">
+    <section id="about" className="most-trusted-section">
       <div className="container">
         <div className="trusted-banner-wrap">
           <span className="line right-line"></span>

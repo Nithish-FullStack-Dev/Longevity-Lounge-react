@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 const CallBack = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="container">
         <div className="callback-content">
-          <a href="index.html" className="back-link">
+          <button onClick={() => navigate("/")} className="back-link">
             <img
               src="/assets/images/callbacks/left-arrow.png"
               alt=""
@@ -11,7 +14,7 @@ const CallBack = () => {
               width="4.5"
             />
             Back to home
-          </a>
+          </button>
 
           <div className="title">
             <h1>Request An Appointment</h1>

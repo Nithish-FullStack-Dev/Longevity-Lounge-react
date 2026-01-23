@@ -54,7 +54,13 @@ const Navbar = () => {
       <div className="container">
         <nav className="navbar">
           <div className="nav-logo">
-            <a href="#">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/");
+              }}
+            >
               <img src="/assets/images/logo.png" alt="Longevity Lounge Logo" />
             </a>
           </div>
@@ -74,7 +80,7 @@ const Navbar = () => {
             className={`nav-menu ${menuOpen ? "active" : ""}`}
           >
             {[
-              { label: "Home", id: "" },
+              { label: "Home", id: "home" },
               { label: "About", id: "about" },
               { label: "Our Services", id: "services" },
               { label: "Contact", id: "contact" },
