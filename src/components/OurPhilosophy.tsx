@@ -99,7 +99,7 @@ const OurPhilosophy = () => {
 
             <div
               className="right"
-              data-aos="fade-left"
+              data-aos="fade-up"
               data-aos-duration="1200"
               data-aos-easing="ease-out"
               data-aos-delay="200"
