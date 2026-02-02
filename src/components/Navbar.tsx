@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { StarButton } from "./ui/star-button";
 import { useDesktop } from "@/hooks/useDesktop";
 
-const Navbar = () => {
+interface NavbarProps {
+  menuOpen: boolean;
+  setMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
   const isDesktop = useDesktop();
-  const [menuOpen, setMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState("Home");
   const navigate = useNavigate();
 

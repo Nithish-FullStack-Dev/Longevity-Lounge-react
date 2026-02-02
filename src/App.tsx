@@ -16,6 +16,8 @@ const App = () => {
     return !sessionStorage.getItem("played");
   });
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -30,7 +32,7 @@ const App = () => {
       {showIntro && <IntroAnimation onFinish={() => setShowIntro(false)} />}
 
       <ScrollToTop />
-      <Navbar />
+      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -38,7 +40,7 @@ const App = () => {
       </Routes>
 
       <Footer />
-      <MobileBottomBar />
+      {!menuOpen && <MobileBottomBar />}
 
       <div className="copyright">
         <p>© Copyright 2025 - Longevity Lounge All Rights Reserved.</p>

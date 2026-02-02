@@ -1,11 +1,9 @@
 import { Microscope } from "lucide-react";
+import { useEffect, useRef } from "react";
 import "aos/dist/aos.css";
-import { useEffect, useRef, useState } from "react";
 
 const MostTrusted = () => {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [isMuted, setIsMuted] = useState(true);
-  const [isManuallyControlled, setIsManuallyControlled] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -14,28 +12,17 @@ const MostTrusted = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!isManuallyControlled) {
-            if (entry.isIntersecting) {
-              // Video is in view - unmute
-              video.muted = false;
-              setIsMuted(false);
-              video.play().catch((err) => {
-                // If autoplay fails, keep muted
-                console.log("Autoplay with sound failed:", err);
-                video.muted = true;
-                setIsMuted(true);
-              });
-            } else {
-              // Video is out of view - mute
-              video.muted = true;
-              setIsMuted(true);
-            }
+          if (entry.isIntersecting) {
+            // Unmute when 30% visible
+            video.muted = false;
+          } else {
+            // Mute when out of view
+            video.muted = true;
           }
         });
       },
       {
-        threshold: 0.5,
-        rootMargin: "0px",
+        threshold: 0.3, // Trigger when 30% visible
       },
     );
 
@@ -44,30 +31,7 @@ const MostTrusted = () => {
     return () => {
       observer.disconnect();
     };
-  }, [isManuallyControlled]);
-
-  const handleVideoClick = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Mark as manually controlled
-    setIsManuallyControlled(true);
-
-    if (isMuted) {
-      video.muted = false;
-      setIsMuted(false);
-    } else {
-      video.muted = true;
-      setIsMuted(true);
-    }
-
-    video.play();
-
-    // Reset manual control after 3 seconds of no interaction
-    setTimeout(() => {
-      setIsManuallyControlled(false);
-    }, 3000);
-  };
+  }, []);
 
   return (
     <section id="about" className="most-trusted-section">
@@ -108,26 +72,13 @@ const MostTrusted = () => {
                 muted
                 playsInline
                 preload="auto"
-                webkit-playsinline="true"
                 poster="/assets/images/video-poster.jpg"
-                onClick={handleVideoClick}
-                style={{ cursor: "pointer" }}
               >
                 <source
                   src="/assets/images/video/LL long video with audio low (1).mp4"
                   type="video/mp4"
                 />
               </video>
-
-              {isMuted && (
-                <button
-                  className="unmute-btn"
-                  onClick={handleVideoClick}
-                  style={{ pointerEvents: "all" }}
-                >
-                  Tap for sound
-                </button>
-              )}
             </div>
           </div>
 
