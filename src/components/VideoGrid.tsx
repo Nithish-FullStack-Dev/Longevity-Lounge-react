@@ -109,7 +109,6 @@ export default function VideoGrid() {
               key={video.id}
               className="video-card"
               onClick={() => setActiveVideo(video)}
-              onPlay={enterFullscreenLandscape}
               data-aos="fade-up"
               data-aos-duration="800"
               data-aos-delay={index * 100}
