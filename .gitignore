@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Ignore uploaded / large video files
-public/assets/images/video-grid/
+# public/assets/images/video-grid/
