@@ -84,7 +84,7 @@ const MostTrusted = () => {
               data-aos-duration="800"
               data-aos-delay="100"
             >
-              <Microscope className="icon-highlight" />
+              <Microscope className="icon-highlight md:block hidden" />
               <h2 className="section-title">
                 Expert Led Series Unlock the Power of Personalized Medicine
               </h2>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "aos/dist/aos.css";
 import "./VideoGrid.css";
 
@@ -68,6 +68,28 @@ const videos: VideoItem[] = [
 
 export default function VideoGrid() {
   const [activeVideo, setActiveVideo] = useState<VideoItem | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const enterFullscreenLandscape = async () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    try {
+      if (video.requestFullscreen) {
+        await video.requestFullscreen();
+      }
+
+      const orientation = screen.orientation as {
+        lock?: (orientation: "landscape") => Promise<void>;
+      };
+
+      if (orientation?.lock) {
+        await orientation.lock("landscape");
+      }
+    } catch (err) {
+      console.log("Fullscreen/orientation not supported");
+    }
+  };
 
   return (
     <section className="video-grid-section">
@@ -87,6 +109,7 @@ export default function VideoGrid() {
               key={video.id}
               className="video-card"
               onClick={() => setActiveVideo(video)}
+              onPlay={enterFullscreenLandscape}
               data-aos="fade-up"
               data-aos-duration="800"
               data-aos-delay={index * 100}

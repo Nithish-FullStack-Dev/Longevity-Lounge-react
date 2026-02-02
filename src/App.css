@@ -463,9 +463,6 @@
     width: 95%;
     margin: 0 auto;
   }
-  .bp-content {
-    padding-top: 12px;
-  }
 }
 
 @media (max-width: 700px) {
@@ -488,7 +485,7 @@
     padding: 13px 19px;
   }
   .trusted-banner span {
-    font-size: 14px;
+    font-size: 15px;
   }
   .section-title {
     font-size: 26px;
@@ -678,7 +675,7 @@
 @media (max-width: 576px) {
   .hj-title {
     font-size: 22px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
   .hj-grid {
     grid-template-columns: 1fr;
@@ -1031,7 +1028,7 @@
   /* PARAGRAPHS */
   .left .para {
     line-height: 1.6;
-    text-align: center;
+    text-align: justify;
     margin-bottom: 14px;
   }
 

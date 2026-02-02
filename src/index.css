@@ -497,7 +497,7 @@ body {
 .hex-label p {
   margin: 0;
   text-align: center;
-  font-family: "The Seasons", serif;
+  font-family: "Inter", serif;
   font-size: 18px;
   line-height: 1.12;
   font-weight: 400;
@@ -1698,7 +1698,7 @@ body {
   margin-bottom: 40px;
 }
 
-.title {
+.callback-content .title {
   display: flex;
   width: 100%;
   /* align-items: center; */
