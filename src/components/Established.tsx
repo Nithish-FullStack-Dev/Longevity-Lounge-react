@@ -6,7 +6,7 @@ const Established = () => {
   const cards = [
     {
       img: "./assets/images/most-trusted/1.jpg",
-      title: "Find Your\nBiological Age",
+      title: "Find Your\nBiological\nAge",
     },
     {
       img: "./assets/images/most-trusted/2.jpg",
