@@ -269,7 +269,7 @@ body {
 .nav-menu {
   display: flex;
   gap: 6px;
-  padding: 4px 1px;
+  padding: 6px 8px;
   border-radius: 999px;
   background: var(--pill-bg);
   border: 1px solid var(--pill-border);
@@ -279,10 +279,12 @@ body {
 
 .nav-item {
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 40px;
 }
 
 .nav-link {
-  padding: 10px 22px;
   border-radius: 999px;
   background: transparent;
   border: none;

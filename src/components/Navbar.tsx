@@ -46,10 +46,8 @@ const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
     navigate(`/#${id}`);
   };
 
-  const NAV_BTN_CLASSES =
-    "px-3 inline-flex items-center justify-center rounded-full whitespace-nowrap";
   const NAV_ITEM_BASE =
-    "w-full h-[48px] flex items-center justify-start px-4 text-left";
+    "inline-flex items-center justify-center h-10 px-5 py-2 text-sm font-medium rounded-full whitespace-nowrap font-['Inter',sans-serif]";
 
   return (
     <header className="site-header">
@@ -90,44 +88,43 @@ const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
               const isActive = activeItem === item.label;
 
               return (
-                <li key={item.label} className="nav-item overflow-visible">
-                  {isActive ? (
-                    isDesktop ? (
-                      /* DESKTOP — Animated StarButton */
-                      <button
-                        type="button"
-                        onClick={() =>
-                          item.id
-                            ? handleNavClick(item.id, item.label)
-                            : setActiveItem("Home")
-                        }
-                        className={NAV_BTN_CLASSES}
-                      >
-                        <StarButton
-                          lightColor="#F6BF7F"
-                          backgroundColor="black"
-                          borderWidth={1}
-                          className="bg-black border border-white/25 px-5 py-2 rounded-full pointer-events-none [&_span]:text-[#f6bf7f] [&_span]:bg-none [&_span]:!text-opacity-100 [&_span]:font-['Inter',sans-serif]"
-                        >
-                          {item.label}
-                        </StarButton>
-                      </button>
-                    ) : (
-                      /* MOBILE — Plain button */
-                      <button
-                        type="button"
-                        onClick={() =>
-                          item.id
-                            ? handleNavClick(item.id, item.label)
-                            : setActiveItem("Home")
-                        }
-                        className={`${NAV_ITEM_BASE} text-[#f6bf7f] font-['Inter',sans-serif] bg-transparent`}
+                <li key={item.label} className="nav-item">
+                  {isDesktop ? (
+                    /* DESKTOP — Always use StarButton wrapper, toggle visual state with opacity */
+                    <div
+                      onClick={() =>
+                        item.id
+                          ? handleNavClick(item.id, item.label)
+                          : setActiveItem("Home")
+                      }
+                      className="cursor-pointer"
+                    >
+                      <StarButton
+                        lightColor="#F6BF7F"
+                        backgroundColor="black"
+                        borderWidth={1}
+                        className={`
+                          h-10 px-5 py-2 rounded-full transition-all duration-300
+                          ${
+                            isActive
+                              ? "bg-black border border-white/25"
+                              : "bg-transparent border border-transparent hover:bg-white/10"
+                          }
+                          [&_span]:font-['Inter',sans-serif]
+                          ${
+                            isActive
+                              ? "[&_span]:text-[#f6bf7f] [&_span]:!text-opacity-100"
+                              : "[&_span]:text-white/80 [&_span]:!text-opacity-80 hover:[&_span]:text-white hover:[&_span]:!text-opacity-100"
+                          }
+                          [&_span]:bg-none
+                          ${isActive ? "" : "[&>div:first-child]:opacity-0"}
+                        `}
                       >
                         {item.label}
-                      </button>
-                    )
+                      </StarButton>
+                    </div>
                   ) : (
-                    /* INACTIVE ITEM (ALL DEVICES) */
+                    /* MOBILE — Plain button */
                     <button
                       type="button"
                       onClick={() =>
@@ -135,7 +132,11 @@ const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
                           ? handleNavClick(item.id, item.label)
                           : setActiveItem("Home")
                       }
-                      className={`${NAV_ITEM_BASE} nav-link`}
+                      className={`${NAV_ITEM_BASE} ${
+                        isActive
+                          ? "text-[#f6bf7f]"
+                          : "text-white/80 hover:text-white"
+                      } bg-transparent transition-colors duration-300`}
                     >
                       {item.label}
                     </button>
@@ -157,17 +158,16 @@ const Navbar = ({ menuOpen, setMenuOpen }: NavbarProps) => {
                   backgroundColor="black"
                   borderWidth={1}
                   className="
-        bg-transparent
-        border border-white/25
-        px-7 py-3
-        rounded-full
-        pointer-events-none
-
-        [&_span]:text-[#f6bf7f]
-        [&_span]:bg-none
-        [&_span]:!text-opacity-100
-        [&_span]:font-['Inter',sans-serif]
-      "
+                    bg-transparent
+                    border border-white/25
+                    px-7 py-3
+                    rounded-full
+                    pointer-events-none
+                    [&_span]:text-[#f6bf7f]
+                    [&_span]:bg-none
+                    [&_span]:!text-opacity-100
+                    [&_span]:font-['Inter',sans-serif]
+                  "
                 >
                   Request Callback
                 </StarButton>
